@@ -24,13 +24,13 @@ public class Note {
     if (!(obj instanceof Note)) // if (obj == null || !getClass().equals(obj.getClass()))
       return false;
     Note obj2 = (Note) obj;
-    if (!getTitle().equals(obj2.getTitle()))
+    if (!title.equals(obj2.title))
       return false;
     return true;
   }
 
   @Override
   public int hashCode() {
-    return Arrays.hashCode(new Object[] { getTitle() });
+    return Arrays.hashCode(new Object[] { title });
   }
 }
