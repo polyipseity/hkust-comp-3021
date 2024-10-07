@@ -3,7 +3,7 @@ package base;
 import java.util.Arrays;
 import java.util.Date;
 
-public class Note {
+public class Note implements Comparable<Note> {
   private Date date;
 
   private String title;
@@ -32,5 +32,10 @@ public class Note {
   @Override
   public int hashCode() {
     return Arrays.hashCode(new Object[] { title });
+  }
+
+  @Override
+  public int compareTo(Note o) {
+    return -date.compareTo(o.date);
   }
 }
