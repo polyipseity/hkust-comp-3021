@@ -9,6 +9,11 @@ public class Note implements Comparable<Note> {
   private String title;
 
   public Note(String title) {
+    try {
+      Thread.sleep(10); // make `date` different
+    } catch (InterruptedException e) {
+      Thread.currentThread().interrupt();
+    }
     this.date = new Date();
     this.title = title;
   }
@@ -37,5 +42,10 @@ public class Note implements Comparable<Note> {
   @Override
   public int compareTo(Note o) {
     return -date.compareTo(o.date);
+  }
+
+  @Override
+  public String toString() {
+    return date + "\t" + title;
   }
 }

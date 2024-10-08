@@ -15,6 +15,10 @@ public class NoteBook {
     return insertNote(folderName, new TextNote(title));
   }
 
+  public boolean createTextNote(String folderName, String title, String content) {
+    return insertNote(folderName, new TextNote(title, content));
+  }
+
   public boolean createImageNote(String folderName, String title) {
     return insertNote(folderName, new ImageNote(title));
   }
