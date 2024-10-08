@@ -2,6 +2,7 @@ package base;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class NoteBook {
   private ArrayList<Folder> folders;
@@ -49,5 +50,9 @@ public class NoteBook {
       folder.sortNotes();
     }
     Collections.sort(folders);
+  }
+
+  public List<Note> searchNotes(String keywords) {
+    return folders.stream().flatMap(folder -> folder.searchNotes(keywords).stream()).toList();
   }
 }

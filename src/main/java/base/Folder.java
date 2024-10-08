@@ -3,6 +3,8 @@ package base;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
+import java.util.Locale;
 
 public class Folder implements Comparable<Folder> {
   private ArrayList<Note> notes;
@@ -65,5 +67,43 @@ public class Folder implements Comparable<Folder> {
 
   public void sortNotes() {
     Collections.sort(notes);
+  }
+
+  public List<Note> searchNotes(String keywords) {
+    List<List<String>> keywordTerms = new ArrayList<>();
+    List<String> lastKeywordTerm = null;
+    boolean sameTerm = false;
+    for (String keyword : keywords.toLowerCase(Locale.ROOT).split(" +")) {
+      if (keyword.isEmpty())
+        continue;
+      if ("or".equals(keyword)) {
+        sameTerm = true;
+        continue;
+      }
+      if (sameTerm) {
+        if (lastKeywordTerm == null) {
+          lastKeywordTerm = new ArrayList<>();
+          keywordTerms.add(lastKeywordTerm);
+        }
+        lastKeywordTerm.add(keyword);
+        sameTerm = false;
+        continue;
+      }
+      lastKeywordTerm = new ArrayList<>();
+      lastKeywordTerm.add(keyword);
+      keywordTerms.add(lastKeywordTerm);
+    }
+    return keywordTerms.isEmpty() ? new ArrayList<>()
+        : notes.stream()
+            .filter(note -> keywordTerms.stream().allMatch(keywordTerm -> keywordTerm.stream().anyMatch(word -> {
+              if (note.getTitle().toLowerCase(Locale.ROOT).contains(word))
+                return true;
+              if (note instanceof TextNote) {
+                TextNote note2 = (TextNote) note;
+                if (note2.content.toLowerCase(Locale.ROOT).contains(word))
+                  return true;
+              }
+              return false;
+            }))).toList();
   }
 }
