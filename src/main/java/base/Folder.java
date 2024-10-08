@@ -2,6 +2,7 @@ package base;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class Folder implements Comparable<Folder> {
   private ArrayList<Note> notes;
@@ -60,5 +61,9 @@ public class Folder implements Comparable<Folder> {
   @Override
   public int compareTo(Folder o) {
     return name.compareTo(o.name);
+  }
+
+  public void sortNotes() {
+    Collections.sort(notes);
   }
 }

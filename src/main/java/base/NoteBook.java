@@ -1,6 +1,7 @@
 package base;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class NoteBook {
   private ArrayList<Folder> folders;
@@ -41,5 +42,12 @@ public class NoteBook {
 
   public ArrayList<Folder> getFolders() {
     return folders;
+  }
+
+  public void sortFolders() {
+    for (Folder folder : folders) {
+      folder.sortNotes();
+    }
+    Collections.sort(folders);
   }
 }
