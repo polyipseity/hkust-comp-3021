@@ -3,7 +3,7 @@ package base;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Folder {
+public class Folder implements Comparable<Folder> {
   private ArrayList<Note> notes;
 
   private String name;
@@ -55,5 +55,10 @@ public class Folder {
   @Override
   public int hashCode() {
     return Arrays.hashCode(new Object[] { name });
+  }
+
+  @Override
+  public int compareTo(Folder o) {
+    return name.compareTo(o.name);
   }
 }
