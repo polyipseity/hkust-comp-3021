@@ -8,13 +8,10 @@ public class Note implements Comparable<Note> {
 
   private String title;
 
+  static long counter = 1L;
+
   public Note(String title) {
-    try {
-      Thread.sleep(10); // make `date` different
-    } catch (InterruptedException e) {
-      Thread.currentThread().interrupt();
-    }
-    this.date = new Date();
+    this.date = new Date(counter++);
     this.title = title;
   }
 
