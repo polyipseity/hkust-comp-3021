@@ -8,4 +8,9 @@ public class ImageNote extends Note {
   public ImageNote(String title) {
     super(title);
   }
+
+  @Override
+  public String toString() {
+    return getClass().getSimpleName() + ':' + super.toString();
+  }
 }
