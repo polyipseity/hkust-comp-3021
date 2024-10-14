@@ -2,6 +2,7 @@ package base;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.stream.IntStream;
 
 public class Note implements Comparable<Note> {
   private Date date;
@@ -38,7 +39,13 @@ public class Note implements Comparable<Note> {
 
   @Override
   public int compareTo(Note o) {
-    return -date.compareTo(o.date);
+    Class<?>[] classOrder = { TextNote.class, ImageNote.class };
+    int classCompareTo = IntStream.range(0, classOrder.length).filter(idx -> classOrder[idx].isInstance(this))
+        .findFirst().orElse(-1)
+        - IntStream.range(0, classOrder.length).filter(idx -> classOrder[idx].isInstance(o)).findFirst().orElse(-1);
+    if (classCompareTo != 0)
+      return classCompareTo;
+    return title.compareTo(o.title);
   }
 
   @Override
