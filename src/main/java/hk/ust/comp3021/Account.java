@@ -13,7 +13,6 @@ public abstract class Account {
     protected Location location;
 
     /// This is where the registered accounts are stored.
-    @Data
     protected static class AccountManager {
 
         private List<Account> registeredAccounts;
