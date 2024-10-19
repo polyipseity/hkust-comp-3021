@@ -148,7 +148,6 @@ public class DispatchSystem {
                     fields[i] = fields[i].trim();
                 }
 
-                // TODO.
                 long id = Long.parseLong(fields[0]);
                 String name = fields[1];
                 String desc = fields[2];
@@ -181,7 +180,6 @@ public class DispatchSystem {
                     fields[i] = fields[i].trim();
                 }
 
-                // TODO.
                 long id = Long.parseLong(fields[0]);
                 int status = Integer.parseInt(fields[1]);
                 Restaurant restaurant = Restaurant.getRestaurantById(Long.parseLong(fields[2]));
