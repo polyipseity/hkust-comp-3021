@@ -11,6 +11,7 @@ public class Restaurant extends Account {
 
     @Override
     public void register() {
+        Account.getAccountManager().addRestaurant(this);
     }
 
     public void addDish(Dish dish) {

@@ -9,7 +9,7 @@ public class Customer extends Account {
 
     @Override
     public void register() {
-        // TODO Auto-generated method stub
+        Account.getAccountManager().addCustomer(this);
     }
 
     public static Customer getCustomerById(Long id) {

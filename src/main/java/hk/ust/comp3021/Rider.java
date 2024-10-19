@@ -11,6 +11,7 @@ public class Rider extends Account {
 
     @Override
     public void register() {
+        Account.getAccountManager().addRider(this);
     }
 
     public static Rider getRiderById(Long id) {

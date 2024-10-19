@@ -1,5 +1,8 @@
 package hk.ust.comp3021;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Account {
 
     protected Long id;
@@ -24,6 +27,10 @@ public abstract class Account {
         private List<Rider> registeredRiders;
 
         public AccountManager() {
+            this.registeredAccounts = new ArrayList<>();
+            this.registeredCustomers = new ArrayList<>();
+            this.registeredRestaurants = new ArrayList<>();
+            this.registeredRiders = new ArrayList<>();
         }
 
         /// Do not modify this method.
