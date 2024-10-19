@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Restaurant extends Account {
-    private final String district;
+    public final String district;
 
-    private final String street;
+    public final String street;
 
-    private final List<Dish> dishes;
+    public final List<Dish> dishes;
 
     public Restaurant(long id, String name, String contactNumber, Location location, String district, String street) {
         super(id, "RESTAURANT", name, contactNumber, location);
@@ -26,6 +26,7 @@ public class Restaurant extends Account {
     }
 
     public static Restaurant getRestaurantById(Long id) {
+        return Account.getAccountManager().getRestaurantById(id);
     }
 
     /// Do not modify this method.

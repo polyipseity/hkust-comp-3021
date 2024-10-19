@@ -1,23 +1,39 @@
 package hk.ust.comp3021;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Order {
-  private Long id;
+  public final Long id;
 
-  private Integer status;
+  public final Integer status;
 
-  private Restaurant restaurant;
+  public final Restaurant restaurant;
 
-  private Customer customer;
+  public final Customer customer;
 
-  private Long createTime;
+  public final Long createTime;
 
-  private Boolean isPayed;
+  public final Boolean isPayed;
 
-  private List<Dish> orderedDishes;
+  public final List<Dish> orderedDishes;
 
-  private Rider rider;
+  public final Rider rider;
 
   private Double estimatedTime;
+
+  public Order(long id, int status, Restaurant restaurant, Customer customer, long createTime, boolean isPayed,
+      List<Dish> orderedDishes, Rider rider) {
+    this.id = id;
+    this.status = status;
+    this.restaurant = restaurant;
+    this.customer = customer;
+    this.createTime = createTime;
+    this.isPayed = isPayed;
+    this.orderedDishes = new ArrayList<>(orderedDishes);
+    this.rider = rider;
+    this.estimatedTime = null;
+  }
 
   public double calculateEstimatedTime() {
   }

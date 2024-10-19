@@ -3,15 +3,15 @@ package hk.ust.comp3021;
 import java.math.BigDecimal;
 
 public class Dish {
-  private final Long id;
+  public final Long id;
 
-  private final String name;
+  public final String name;
 
-  private final String desc;
+  public final String desc;
 
-  private final BigDecimal price;
+  public final BigDecimal price;
 
-  private final Long restaurantId;
+  public final Long restaurantId;
 
   public Dish(long id, String name, String desc, BigDecimal price, long restaurantId) {
     this.id = id;

@@ -1,13 +1,13 @@
 package hk.ust.comp3021;
 
 public class Rider extends Account {
-    private final String gender;
+    public final String gender;
 
-    private final Integer status;
+    public final Integer status;
 
-    private final Double userRating;
+    public final Double userRating;
 
-    private final Integer monthTaskCount;
+    public final Integer monthTaskCount;
 
     public Rider(long id, String name, String contactNumber, Location location, String gender, int status,
             double userRating, int monthTaskCount) {
@@ -24,6 +24,7 @@ public class Rider extends Account {
     }
 
     public static Rider getRiderById(Long id) {
+        return getAccountManager().getRiderById(id);
     }
 
     /// Do not modify this method.

@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class DispatchSystem {
 
@@ -51,9 +52,22 @@ public class DispatchSystem {
     }
 
     public Dish getDishById(Long id) {
+        for (Dish dish : availableDishes) {
+            if (dish.id == id)
+                return dish;
+        }
+        return null;
     }
 
     public Boolean checkDishesInRestaurant(Restaurant restaurant, Long[] dishIds) {
+        return Stream.of(dishIds).allMatch(id -> {
+            if (id == null)
+                return false;
+            Dish dish = getDishById(id);
+            if (dish == null)
+                return false;
+            return dish.restaurantId == restaurant.id;
+        });
     }
 
     /// Task 2: Implement the parseAccounts() method to parse the accounts from the
@@ -158,7 +172,25 @@ public class DispatchSystem {
                 }
 
                 // TODO.
+                long id = Long.parseLong(fields[0]);
+                int status = Integer.parseInt(fields[1]);
+                Restaurant restaurant = Restaurant.getRestaurantById(Long.parseLong(fields[2]));
+                Customer customer = Customer.getCustomerById(Long.parseLong(fields[3]));
+                long createTime = Long.parseLong(fields[4]);
+                boolean isPayed = Integer.parseInt(fields[5]) != 0;
+                String[] orderedDishesStrings = fields[6].substring(1, fields[6].length() - 1).split(" ");
+                Long[] orderedDishIds = Stream.of(orderedDishesStrings).map(Long::parseLong)
+                        .toArray(Long[]::new);
+                if (!checkDishesInRestaurant(restaurant, orderedDishIds)) {
+                    continue;
+                }
+                List<Dish> orderedDishes = Stream.of(orderedDishIds).map(this::getDishById).toList();
+                Rider rider = "NA".equals(fields[7]) ? null : Rider.getRiderById(Long.parseLong(fields[7]));
 
+                Order order = new Order(id, status, restaurant,
+                        customer, createTime, isPayed, orderedDishes,
+                        rider);
+                availableOrders.add(order);
             }
         }
     }

@@ -1,11 +1,11 @@
 package hk.ust.comp3021;
 
 public class Customer extends Account {
-    private final Integer customerType;
+    public final Integer customerType;
 
-    private final String gender;
+    public final String gender;
 
-    private final String email;
+    public final String email;
 
     public Customer(long id, String name, String contactNumber, Location location, int customerType, String gender,
             String email) {
@@ -21,6 +21,7 @@ public class Customer extends Account {
     }
 
     public static Customer getCustomerById(Long id) {
+        return Account.getAccountManager().getCustomerById(id);
     }
 
     /// Do not modify this method.
