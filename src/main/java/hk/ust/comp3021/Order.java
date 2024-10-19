@@ -32,7 +32,7 @@ public class Order {
     this.isPayed = isPayed;
     this.orderedDishes = new ArrayList<>(orderedDishes);
     this.rider = rider;
-    this.estimatedTime = Double.POSITIVE_INFINITY;
+    this.estimatedTime = null;
   }
 
   public Rider getRider() {
@@ -55,7 +55,7 @@ public class Order {
     return estimatedTime;
   }
 
-  public void setEstimatedTime(double estimatedTime) {
+  public void setEstimatedTime(Double estimatedTime) {
     this.estimatedTime = estimatedTime;
   }
 

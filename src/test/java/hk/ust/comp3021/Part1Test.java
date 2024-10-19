@@ -27,7 +27,7 @@ public class Part1Test {
 
   @BeforeEach
   public void setupEach() throws IOException {
-    DispatchSystem.setDispatchSystem(null);
+    DispatchSystem.resetDispatchSystem();
     system = DispatchSystem.getInstance();
     system.parseAccounts(getClass().getResourceAsStream("SampleInputAccounts.txt"));
     system.parseDishes(getClass().getResourceAsStream("SampleInputDishes.txt"));

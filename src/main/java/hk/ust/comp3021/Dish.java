@@ -40,4 +40,15 @@ public class Dish {
   public Long getRestaurantId() {
     return restaurantId;
   }
+
+  @Override
+  public String toString() {
+    return "Dish(" +
+        "id=" + id +
+        ", name=" + name +
+        ", desc=" + desc +
+        ", price=" + price +
+        ", restaurantId=" + restaurantId +
+        ')';
+  }
 }

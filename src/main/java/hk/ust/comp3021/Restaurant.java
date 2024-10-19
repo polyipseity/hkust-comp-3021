@@ -24,6 +24,7 @@ public class Restaurant extends Account {
     }
 
     public void addDish(Dish dish) {
+        dishes.add(dish);
     }
 
     public static Restaurant getRestaurantById(Long id) {

@@ -396,8 +396,9 @@ public class DispatchSystem {
         this.currentTimestamp = currentTimestamp;
     }
 
-    static void setDispatchSystem(DispatchSystem dispatchSystem) {
-        DispatchSystem.dispatchSystem = dispatchSystem;
+    static void resetDispatchSystem() {
+        DispatchSystem.dispatchSystem = null;
+        Account.accountManager = new Account.AccountManager();
     }
 
     void parseAccounts(InputStream input) throws IOException {

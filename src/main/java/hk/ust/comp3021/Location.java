@@ -21,4 +21,12 @@ public class Location {
   public Double getAltitude() {
     return altitude;
   }
+
+  @Override
+  public String toString() {
+    return "Location(" +
+        "latitude=" + latitude +
+        ", altitude=" + altitude +
+        ')';
+  }
 }
