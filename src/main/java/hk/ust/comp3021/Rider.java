@@ -1,6 +1,20 @@
 package hk.ust.comp3021;
 
-public class Rider {
+public class Rider extends Account {
+    private String gender;
+
+    private Integer status;
+
+    private Double userRating;
+
+    private Integer monthTaskCount;
+
+    @Override
+    public void register() {
+    }
+
+    public static Rider getRiderById(Long id) {
+    }
 
     /// Do not modify this method.
     @Override

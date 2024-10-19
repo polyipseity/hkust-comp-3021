@@ -1,6 +1,19 @@
 package hk.ust.comp3021;
 
-public class Customer {
+public class Customer extends Account {
+    private Integer customerType;
+
+    private String gender;
+
+    private String email;
+
+    @Override
+    public void register() {
+        // TODO Auto-generated method stub
+    }
+
+    public static Customer getCustomerById(Long id) {
+    }
 
     /// Do not modify this method.
     @Override
