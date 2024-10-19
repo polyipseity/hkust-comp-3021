@@ -60,5 +60,7 @@ public class Order {
   }
 
   public double calculateEstimatedTime() {
+    return (rider.location.distanceTo(restaurant.location) + restaurant.location.distanceTo(customer.location))
+        / Constants.DELIVERY_SPEED;
   }
 }
