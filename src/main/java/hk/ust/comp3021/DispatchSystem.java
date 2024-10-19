@@ -339,7 +339,7 @@ public class DispatchSystem {
     /// Hint: Do not forget to take the current time stamp into consideration.
     public List<Order> getTimeoutDispatchedOrders() {
         return new ArrayList<>(dispatchedOrders.stream().filter(
-                order -> order.getEstimatedTime() > Constants.DELIVERY_TIME_LIMIT)
+                order -> currentTimestamp + order.getEstimatedTime() > order.createTime + Constants.DELIVERY_TIME_LIMIT)
                 .toList());
     }
 
