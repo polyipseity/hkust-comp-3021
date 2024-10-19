@@ -205,9 +205,9 @@ public class DispatchSystem {
     /// Hint: The available pending orders should have the status of PENDING_ORDER,
     /// is payed, and the rider is null.
     public List<Order> getAvailablePendingOrders() {
-        return availableOrders.stream()
+        return new ArrayList<>(availableOrders.stream()
                 .filter(order -> order.status == Constants.PENDING_ORDER && order.isPayed && order.getRider() == null)
-                .toList();
+                .toList());
     }
 
     /// Task 6: Implement the getRankedPendingOrders() method to rank the pending
@@ -226,6 +226,8 @@ public class DispatchSystem {
     /// riders to dispatch.
     /// Hint: The available riders should have the status of RIDER_ONLINE_ORDER.
     public List<Rider> getAvailableRiders() {
+        return new ArrayList<>(Account.getAccountManager().getRegisteredRiders().stream()
+                .filter(rider -> rider.status == Constants.RIDER_ONLINE_ORDER).toList());
     }
 
     /// Task 8: Implement the matchTheBestTask() method to choose the best rider for
