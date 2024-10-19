@@ -43,7 +43,7 @@ public class Part2Test {
   public void testOutput() throws IOException {
     system.dispatchFirstRound();
     try (ByteArrayOutputStream output = new ByteArrayOutputStream()) {
-      system.writeOrders(output, system.getAvailableOrders());
+      system.writeOrders(output, system.getDispatchedOrders());
       assertLinesMatch(expectedOutput.stream(), output.toString(StandardCharsets.UTF_8).lines());
     }
   }

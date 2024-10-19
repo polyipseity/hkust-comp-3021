@@ -43,9 +43,8 @@ public class Part3Test {
   @Test
   public void testOutput() throws IOException {
     system.dispatchFirstRound();
-    List<Order> timeoutDispatchedOrders = system.getTimeoutDispatchedOrders();
     try (ByteArrayOutputStream output = new ByteArrayOutputStream()) {
-      system.writeOrders(output, timeoutDispatchedOrders);
+      system.writeOrders(output, system.getTimeoutDispatchedOrders());
       assertLinesMatch(expectedOutput.stream(), output.toString(StandardCharsets.UTF_8).lines());
     }
   }
