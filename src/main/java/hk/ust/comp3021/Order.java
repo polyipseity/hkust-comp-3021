@@ -6,7 +6,7 @@ import java.util.List;
 public class Order {
   public final Long id;
 
-  public final Integer status;
+  private Integer status;
 
   public final Restaurant restaurant;
 
@@ -32,11 +32,31 @@ public class Order {
     this.isPayed = isPayed;
     this.orderedDishes = new ArrayList<>(orderedDishes);
     this.rider = rider;
-    this.estimatedTime = null;
+    this.estimatedTime = Double.POSITIVE_INFINITY;
   }
 
   public Rider getRider() {
     return rider;
+  }
+
+  public void setRider(Rider rider) {
+    this.rider = rider;
+  }
+
+  public int getStatus() {
+    return status;
+  }
+
+  public void setStatus(int status) {
+    this.status = status;
+  }
+
+  public double getEstimatedTime() {
+    return estimatedTime;
+  }
+
+  public void setEstimatedTime(double estimatedTime) {
+    this.estimatedTime = estimatedTime;
   }
 
   public double calculateEstimatedTime() {

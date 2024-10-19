@@ -3,7 +3,7 @@ package hk.ust.comp3021;
 public class Rider extends Account {
     public final String gender;
 
-    public final Integer status;
+    private Integer status;
 
     public final Double userRating;
 
@@ -16,6 +16,14 @@ public class Rider extends Account {
         this.status = status;
         this.userRating = userRating;
         this.monthTaskCount = monthTaskCount;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     @Override

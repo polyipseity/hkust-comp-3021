@@ -209,7 +209,8 @@ public class DispatchSystem {
     /// is payed, and the rider is null.
     public List<Order> getAvailablePendingOrders() {
         return new ArrayList<>(availableOrders.stream()
-                .filter(order -> order.status == Constants.PENDING_ORDER && order.isPayed && order.getRider() == null)
+                .filter(order -> order.getStatus() == Constants.PENDING_ORDER && order.isPayed
+                        && order.getRider() == null)
                 .toList());
     }
 
@@ -230,7 +231,7 @@ public class DispatchSystem {
     /// Hint: The available riders should have the status of RIDER_ONLINE_ORDER.
     public List<Rider> getAvailableRiders() {
         return new ArrayList<>(Account.getAccountManager().getRegisteredRiders().stream()
-                .filter(rider -> rider.status == Constants.RIDER_ONLINE_ORDER).toList());
+                .filter(rider -> rider.getStatus() == Constants.RIDER_ONLINE_ORDER).toList());
     }
 
     /// Task 8: Implement the matchTheBestTask() method to choose the best rider for
@@ -256,6 +257,21 @@ public class DispatchSystem {
     /// the status of the order and the rider after the order is dispatched, and 3.
     /// calculate the estimated time for the order.
     public void dispatchFirstRound() {
+        List<Order> orders = getRankedPendingOrders(getAvailableOrders());
+        List<Rider> riders = getAvailableRiders();
+        while (!orders.isEmpty() && !riders.isEmpty()) {
+            Order order = orders.remove(0);
+            Task task = matchTheBestTask(order, riders);
+            Rider rider = task.rider;
+
+            riders.remove(rider);
+            rider.setStatus(Constants.RIDER_DELIVERING);
+            order.setRider(rider);
+            order.setStatus(Constants.DISPATCHED_ORDER);
+            order.setEstimatedTime(order.calculateEstimatedTime());
+
+            dispatchedOrders.add(order);
+        }
     }
 
     /// Do not modify the method. You should use the method to output orders for us
