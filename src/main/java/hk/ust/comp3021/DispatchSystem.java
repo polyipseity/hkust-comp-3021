@@ -261,7 +261,7 @@ public class DispatchSystem {
     /// the status of the order and the rider after the order is dispatched, and 3.
     /// calculate the estimated time for the order.
     public void dispatchFirstRound() {
-        List<Order> orders = getRankedPendingOrders(getAvailableOrders());
+        List<Order> orders = getRankedPendingOrders(getAvailablePendingOrders());
         List<Rider> riders = getAvailableRiders();
         while (!orders.isEmpty() && !riders.isEmpty()) {
             Order order = orders.remove(0);
