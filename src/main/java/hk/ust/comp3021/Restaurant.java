@@ -46,4 +46,15 @@ public class Restaurant extends Account {
                 '}';
     }
 
+    public String getDistrict() {
+        return district;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public List<Dish> getDishes() {
+        return dishes;
+    }
 }

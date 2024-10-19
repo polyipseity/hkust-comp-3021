@@ -131,4 +131,23 @@ public abstract class Account {
         return accountManager;
     }
 
+    public long getId() {
+      return id;
+    }
+
+    public String getAccountType() {
+      return accountType;
+    }
+
+    public String getName() {
+      return name;
+    }
+
+    public String getContactNumber() {
+      return contactNumber;
+    }
+
+    public Location getLocation() {
+      return location;
+    }
 }

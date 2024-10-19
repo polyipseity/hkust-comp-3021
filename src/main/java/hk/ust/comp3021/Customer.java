@@ -39,4 +39,15 @@ public class Customer extends Account {
                 '}';
     }
 
+    public int getCustomerType() {
+      return customerType;
+    }
+
+    public String getGender() {
+      return gender;
+    }
+
+    public String getEmail() {
+      return email;
+    }
 }

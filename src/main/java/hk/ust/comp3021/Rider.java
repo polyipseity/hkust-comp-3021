@@ -50,4 +50,16 @@ public class Rider extends Account {
                 ", monthTaskCount=" + monthTaskCount +
                 '}';
     }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public double getUserRating() {
+        return userRating;
+    }
+
+    public int getMonthTaskCount() {
+        return monthTaskCount;
+    }
 }

@@ -20,4 +20,24 @@ public class Dish {
     this.price = price;
     this.restaurantId = restaurantId;
   }
+
+  public long getId() {
+    return id;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public String getDesc() {
+    return desc;
+  }
+
+  public BigDecimal getPrice() {
+    return price;
+  }
+
+  public long getRestaurantId() {
+    return restaurantId;
+  }
 }

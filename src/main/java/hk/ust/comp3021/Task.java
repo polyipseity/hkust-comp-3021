@@ -9,4 +9,12 @@ public class Task {
     this.order = order;
     this.rider = rider;
   }
+
+  public Order getOrder() {
+    return order;
+  }
+
+  public Rider getRider() {
+    return rider;
+  }
 }

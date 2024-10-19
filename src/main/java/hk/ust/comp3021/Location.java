@@ -13,4 +13,12 @@ public class Location {
   public double distanceTo(Location location) {
     return Math.sqrt(Math.pow(latitude - location.latitude, 2) + Math.pow(altitude - location.altitude, 2));
   }
+
+  public double getLatitude() {
+    return latitude;
+  }
+
+  public double getAltitude() {
+    return altitude;
+  }
 }

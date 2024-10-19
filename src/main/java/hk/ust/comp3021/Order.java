@@ -63,4 +63,28 @@ public class Order {
     return (rider.location.distanceTo(restaurant.location) + restaurant.location.distanceTo(customer.location))
         / Constants.DELIVERY_SPEED;
   }
+
+  public long getId() {
+    return id;
+  }
+
+  public Restaurant getRestaurant() {
+    return restaurant;
+  }
+
+  public Customer getCustomer() {
+    return customer;
+  }
+
+  public long getCreateTime() {
+    return createTime;
+  }
+
+  public boolean getIsPayed() {
+    return isPayed;
+  }
+
+  public List<Dish> getOrderedDishes() {
+    return orderedDishes;
+  }
 }
