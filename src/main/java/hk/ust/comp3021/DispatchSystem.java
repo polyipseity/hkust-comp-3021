@@ -200,6 +200,9 @@ public class DispatchSystem {
     /// Hint: The available pending orders should have the status of PENDING_ORDER,
     /// is payed, and the rider is null.
     public List<Order> getAvailablePendingOrders() {
+        return availableOrders.stream()
+                .filter(order -> order.status == Constants.PENDING_ORDER && order.isPayed && order.getRider() == null)
+                .toList();
     }
 
     /// Task 6: Implement the getRankedPendingOrders() method to rank the pending

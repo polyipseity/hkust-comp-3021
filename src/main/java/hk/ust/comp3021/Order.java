@@ -18,7 +18,7 @@ public class Order {
 
   public final List<Dish> orderedDishes;
 
-  public final Rider rider;
+  private Rider rider;
 
   private Double estimatedTime;
 
@@ -33,6 +33,10 @@ public class Order {
     this.orderedDishes = new ArrayList<>(orderedDishes);
     this.rider = rider;
     this.estimatedTime = null;
+  }
+
+  public Rider getRider() {
+    return rider;
   }
 
   public double calculateEstimatedTime() {
