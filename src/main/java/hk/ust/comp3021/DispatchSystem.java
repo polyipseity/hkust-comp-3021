@@ -5,6 +5,10 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -382,7 +386,180 @@ public class DispatchSystem {
 
     }
 
-    public Long getCurrentTimestamp() {
+    ////////// for testing only //////////
+
+    Long getCurrentTimestamp() {
         return currentTimestamp;
+    }
+
+    void setCurrentTimestamp(Long currentTimestamp) {
+        this.currentTimestamp = currentTimestamp;
+    }
+
+    static void setDispatchSystem(DispatchSystem dispatchSystem) {
+        DispatchSystem.dispatchSystem = dispatchSystem;
+    }
+
+    void parseAccounts(InputStream input) throws IOException {
+        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(input))) {
+            // Read the file and parse the accounts.
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                if (line.isEmpty()) {
+                    continue;
+                }
+
+                String[] fields = line.split(",");
+                if (fields.length < 2) {
+                    throw new IOException("The account file is not well formatted!");
+                }
+
+                for (int i = 0; i < fields.length; i++) {
+                    fields[i] = fields[i].trim();
+                }
+
+                String accountType = fields[1];
+                long id = Long.parseLong(fields[0]);
+                String name = fields[2];
+                String contactNumber = fields[3];
+                String[] locationStrings = fields[4].substring(1, fields[4].length() - 1).split(" ");
+                Location location = new Location(Double.parseDouble(locationStrings[0]),
+                        Double.parseDouble(locationStrings[1]));
+
+                Account account = null;
+                switch (accountType) {
+                    case "CUSTOMER":
+                        account = new Customer(id, name, contactNumber, location, Integer.parseInt(fields[5]),
+                                fields[6], fields[7]);
+                        break;
+                    case "RESTAURANT":
+                        account = new Restaurant(id, name, contactNumber, location, fields[5], fields[6]);
+                        break;
+                    case "RIDER":
+                        account = new Rider(id, name, contactNumber, location, fields[5], Integer.parseInt(fields[6]),
+                                Double.parseDouble(fields[7]), Integer.parseInt(fields[8]));
+                        break;
+                    default:
+                        throw new IllegalArgumentException("File with invalid account type");
+                }
+                account.register();
+            }
+        }
+    }
+
+    void parseDishes(InputStream input) throws IOException {
+        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(input))) {
+            // Read the file and parse the dishes.
+            String line;
+            while ((line = bufferedReader.readLine()) != null && !line.isEmpty()) {
+                String[] fields = line.split(",");
+                if (fields.length < 2) {
+                    throw new IOException("The dish file is not well formatted!");
+                }
+
+                for (int i = 0; i < fields.length; i++) {
+                    fields[i] = fields[i].trim();
+                }
+
+                long id = Long.parseLong(fields[0]);
+                String name = fields[1];
+                String desc = fields[2];
+                BigDecimal price = new BigDecimal(fields[3]);
+                long restaurantId = Long.parseLong(fields[4]);
+
+                Dish dish = new Dish(id, name, desc, price, restaurantId);
+                availableDishes.add(dish);
+                Restaurant.getRestaurantById(restaurantId).addDish(dish);
+            }
+        }
+    }
+
+    void parseOrders(InputStream input) throws IOException {
+        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(input))) {
+            // Read the file and parse the orders.
+            String line;
+            while ((line = bufferedReader.readLine()) != null && !line.isEmpty()) {
+                String[] fields = line.split(",");
+                if (fields.length < 2) {
+                    throw new IOException("The order file is not well formatted!");
+                }
+
+                for (int i = 0; i < fields.length; i++) {
+                    fields[i] = fields[i].trim();
+                }
+
+                long id = Long.parseLong(fields[0]);
+                int status = Integer.parseInt(fields[1]);
+                Restaurant restaurant = Restaurant.getRestaurantById(Long.parseLong(fields[2]));
+                Customer customer = Customer.getCustomerById(Long.parseLong(fields[3]));
+                long createTime = Long.parseLong(fields[4]);
+                boolean isPayed = Integer.parseInt(fields[5]) != 0;
+                String[] orderedDishesStrings = fields[6].substring(1, fields[6].length() - 1).split(" ");
+                Long[] orderedDishIds = Stream.of(orderedDishesStrings).map(Long::parseLong)
+                        .toArray(Long[]::new);
+                if (!checkDishesInRestaurant(restaurant, orderedDishIds)) {
+                    continue;
+                }
+                List<Dish> orderedDishes = Stream.of(orderedDishIds).map(this::getDishById).toList();
+                Rider rider = "NA".equals(fields[7]) ? null : Rider.getRiderById(Long.parseLong(fields[7]));
+
+                Order order = new Order(id, status, restaurant,
+                        customer, createTime, isPayed, orderedDishes,
+                        rider);
+                availableOrders.add(order);
+            }
+        }
+    }
+
+    void writeOrders(OutputStream output, List<Order> orders) throws IOException {
+        List<Order> orderedOrders = orders.stream().sorted(new Comparator<Order>() {
+            @Override
+            public int compare(Order o1, Order o2) {
+                return o1.getId().compareTo(o2.getId());
+            }
+        }).toList();
+
+        // Write the dispatched orders to the file.
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(output))) {
+            for (Order order : orderedOrders) {
+                bufferedWriter.write(order.getId() + ", " + order.getStatus() + ", " + order.getRestaurant() + ", "
+                        + order.getCustomer() + ", " + order.getCreateTime() + ", " + order.getIsPayed() + ", " +
+                        order.getOrderedDishes() + ", " + order.getRider() + ", "
+                        + String.format("%.4f", order.getEstimatedTime()) + "\n");
+            }
+        }
+    }
+
+    void writeAccounts(OutputStream output, List<Account> accounts) throws IOException {
+        List<Account> orderedAccounts = accounts.stream().sorted(new Comparator<Account>() {
+            @Override
+            public int compare(Account o1, Account o2) {
+                return o1.getId().compareTo(o2.getId());
+            }
+        }).toList();
+
+        // Write the dispatched orders to the file.
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(output))) {
+            for (Account account : orderedAccounts) {
+                bufferedWriter.write(account.toString() + "\n");
+            }
+        }
+    }
+
+    void writeDishes(OutputStream output, List<Dish> dishes) throws IOException {
+        List<Dish> orderedDishes = dishes.stream().sorted(new Comparator<Dish>() {
+            @Override
+            public int compare(Dish o1, Dish o2) {
+                return o1.getId().compareTo(o2.getId());
+            }
+        }).toList();
+
+        // Write the dispatched orders to the file.
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(output))) {
+            for (Dish dish : orderedDishes) {
+                bufferedWriter.write(dish.getId() + ", " + dish.getName() + ", " + dish.getDesc() + ", "
+                        + dish.getPrice() + ", " + dish.getRestaurantId() + "\n");
+            }
+        }
     }
 }
