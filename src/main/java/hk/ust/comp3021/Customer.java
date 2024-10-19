@@ -1,6 +1,5 @@
 package hk.ust.comp3021;
 
-
 public class Customer {
 
     /// Do not modify this method.
