@@ -1,5 +1,8 @@
 package hk.ust.comp3021;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,9 +77,30 @@ public class DispatchSystem {
                 }
 
                 String accountType = fields[1];
+                long id = Long.parseLong(fields[0]);
+                String name = fields[2];
+                String contactNumber = fields[3];
+                String[] locationStrings = fields[4].substring(1, fields[4].length() - 1).split(" ");
+                Location location = new Location(Double.parseDouble(locationStrings[0]),
+                        Double.parseDouble(locationStrings[1]));
 
-                // TODO.
-
+                Account account = null;
+                switch (accountType) {
+                    case "CUSTOMER":
+                        account = new Customer(id, name, contactNumber, location, Integer.parseInt(fields[5]),
+                                fields[6], fields[7]);
+                        break;
+                    case "RESTAURANT":
+                        account = new Restaurant(id, name, contactNumber, location, fields[5], fields[6]);
+                        break;
+                    case "RIDER":
+                        account = new Rider(id, name, contactNumber, location, fields[5], Integer.parseInt(fields[6]),
+                                Double.parseDouble(fields[7]), Integer.parseInt(fields[8]));
+                        break;
+                    default:
+                        throw new IllegalArgumentException("File with invalid account type");
+                }
+                account.register();
             }
         }
     }

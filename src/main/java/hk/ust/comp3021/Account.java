@@ -5,15 +5,23 @@ import java.util.List;
 
 public abstract class Account {
 
-    protected Long id;
+    protected final Long id;
 
-    protected String accountType;
+    protected final String accountType;
 
-    protected String name;
+    protected final String name;
 
-    protected String contactNumber;
+    protected final String contactNumber;
 
-    protected Location location;
+    protected final Location location;
+
+    protected Account(long id, String accountType, String name, String contactNumber, Location location) {
+        this.id = id;
+        this.accountType = accountType;
+        this.name = name;
+        this.contactNumber = contactNumber;
+        this.location = location;
+    }
 
     /// This is where the registered accounts are stored.
     protected static class AccountManager {

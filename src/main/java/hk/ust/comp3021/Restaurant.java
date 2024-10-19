@@ -1,13 +1,21 @@
 package hk.ust.comp3021;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Restaurant extends Account {
-    private String district;
+    private final String district;
 
-    private String street;
+    private final String street;
 
-    private List<Dish> dishes;
+    private final List<Dish> dishes;
+
+    public Restaurant(long id, String name, String contactNumber, Location location, String district, String street) {
+        super(id, "RESTAURANT", name, contactNumber, location);
+        this.district = district;
+        this.street = street;
+        this.dishes = new ArrayList<>();
+    }
 
     @Override
     public void register() {

@@ -1,13 +1,22 @@
 package hk.ust.comp3021;
 
 public class Rider extends Account {
-    private String gender;
+    private final String gender;
 
-    private Integer status;
+    private final Integer status;
 
-    private Double userRating;
+    private final Double userRating;
 
-    private Integer monthTaskCount;
+    private final Integer monthTaskCount;
+
+    public Rider(long id, String name, String contactNumber, Location location, String gender, int status,
+            double userRating, int monthTaskCount) {
+        super(id, "RIDER", name, contactNumber, location);
+        this.gender = gender;
+        this.status = status;
+        this.userRating = userRating;
+        this.monthTaskCount = monthTaskCount;
+    }
 
     @Override
     public void register() {
