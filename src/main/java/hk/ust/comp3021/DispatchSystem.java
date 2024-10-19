@@ -5,8 +5,13 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Stream;
+
+import hk.ust.comp3021.rank.CustomerPriorityRank;
+import hk.ust.comp3021.rank.OrderCreateTimeRank;
+import hk.ust.comp3021.rank.RestaurantToCustomerDistanceRank;
 
 public class DispatchSystem {
 
@@ -211,6 +216,10 @@ public class DispatchSystem {
     /// order of the customer type (Top priority), order creation time (Second
     /// priority), and restaurant to customer distance (Least priority).
     public List<Order> getRankedPendingOrders(List<Order> pendingOrders) {
+        List<Order> ret = new ArrayList<>(pendingOrders);
+        ret.sort(new CustomerPriorityRank().thenComparing(new OrderCreateTimeRank())
+                .thenComparing(new RestaurantToCustomerDistanceRank()));
+        return ret;
     }
 
     /// Task 7: Implement the getAvailableRiders() method to get the available

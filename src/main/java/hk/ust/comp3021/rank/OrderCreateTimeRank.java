@@ -5,5 +5,6 @@ import hk.ust.comp3021.Order;
 public class OrderCreateTimeRank implements PendingOrderRank {
   @Override
   public int compare(Order source, Order target) {
+    return Long.compare(source.createTime, target.createTime);
   }
 }

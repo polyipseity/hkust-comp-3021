@@ -5,15 +5,15 @@ import java.util.List;
 
 public abstract class Account {
 
-    protected final Long id;
+    public final Long id;
 
-    protected final String accountType;
+    public final String accountType;
 
-    protected final String name;
+    public final String name;
 
-    protected final String contactNumber;
+    public final String contactNumber;
 
-    protected final Location location;
+    public final Location location;
 
     protected Account(long id, String accountType, String name, String contactNumber, Location location) {
         this.id = id;
