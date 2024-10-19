@@ -5,5 +5,6 @@ import hk.ust.comp3021.Task;
 public class RiderRatingRank implements TaskRank {
   @Override
   public int compare(Task source, Task target) {
+    return -Double.compare(source.rider.userRating, target.rider.userRating);
   }
 }

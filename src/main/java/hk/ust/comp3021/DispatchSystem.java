@@ -12,6 +12,9 @@ import java.util.stream.Stream;
 import hk.ust.comp3021.rank.CustomerPriorityRank;
 import hk.ust.comp3021.rank.OrderCreateTimeRank;
 import hk.ust.comp3021.rank.RestaurantToCustomerDistanceRank;
+import hk.ust.comp3021.rank.RiderMonthTaskCountRank;
+import hk.ust.comp3021.rank.RiderRatingRank;
+import hk.ust.comp3021.rank.RiderToRestaurantRank;
 
 public class DispatchSystem {
 
@@ -239,6 +242,10 @@ public class DispatchSystem {
     /// Use the comparators you defined before, you will also use the Task class
     /// here and the availableRiders here should be the currently available riders.
     public Task matchTheBestTask(Order order, List<Rider> availableRiders) {
+        return availableRiders.stream().map(rider -> new Task(order, rider))
+                .sorted(new RiderToRestaurantRank().thenComparing(new RiderRatingRank())
+                        .thenComparing(new RiderMonthTaskCountRank()))
+                .findFirst().orElseThrow(() -> new IllegalArgumentException("No available riders"));
     }
 
     /// Task 9: Implement the dispatchFirstRound() method to dispatch the first
