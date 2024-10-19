@@ -1,5 +1,8 @@
 package hk.ust.comp3021;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DispatchSystem {
 
     /// The singleton you will use in the project.
@@ -25,12 +28,22 @@ public class DispatchSystem {
     /// null. Initialize the fields.
 
     private DispatchSystem() {
+        if (dispatchSystem != null) {
+            throw new IllegalStateException("`DispatchSystem` has already been created before");
+        }
+        this.availableDishes = new ArrayList<>();
+        this.availableOrders = new ArrayList<>();
+        this.dispatchedOrders = new ArrayList<>();
     }
 
     /// Task 1: Implement the getInstance() method for the singleton pattern.
     /// Hint: Check if the dispatchSystem is null or not null and create a new
     /// instance here.
     public static DispatchSystem getInstance() {
+        if (dispatchSystem == null) {
+            dispatchSystem = new DispatchSystem();
+        }
+        return dispatchSystem;
     }
 
     public Dish getDishById(Long id) {
