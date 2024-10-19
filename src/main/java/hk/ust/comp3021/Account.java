@@ -132,22 +132,22 @@ public abstract class Account {
     }
 
     public Long getId() {
-      return id;
+        return id;
     }
 
     public String getAccountType() {
-      return accountType;
+        return accountType;
     }
 
     public String getName() {
-      return name;
+        return name;
     }
 
     public String getContactNumber() {
-      return contactNumber;
+        return contactNumber;
     }
 
     public Location getLocation() {
-      return location;
+        return location;
     }
 }

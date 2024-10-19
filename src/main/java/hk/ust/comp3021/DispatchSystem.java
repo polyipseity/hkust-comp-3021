@@ -379,7 +379,6 @@ public class DispatchSystem {
             List<Order> timeoutOrders = system.getTimeoutDispatchedOrders();
 
             system.writeOrders("timeoutDispatchedOrders.txt", timeoutOrders);
-
         } catch (IOException exception) {
             exception.printStackTrace();
         }
