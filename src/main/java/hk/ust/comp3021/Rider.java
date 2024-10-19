@@ -18,7 +18,7 @@ public class Rider extends Account {
         this.monthTaskCount = monthTaskCount;
     }
 
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
@@ -55,11 +55,11 @@ public class Rider extends Account {
         return gender;
     }
 
-    public double getUserRating() {
+    public Double getUserRating() {
         return userRating;
     }
 
-    public int getMonthTaskCount() {
+    public Integer getMonthTaskCount() {
         return monthTaskCount;
     }
 }

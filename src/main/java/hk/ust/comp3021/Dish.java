@@ -21,7 +21,7 @@ public class Dish {
     this.restaurantId = restaurantId;
   }
 
-  public long getId() {
+  public Long getId() {
     return id;
   }
 
@@ -37,7 +37,7 @@ public class Dish {
     return price;
   }
 
-  public long getRestaurantId() {
+  public Long getRestaurantId() {
     return restaurantId;
   }
 }

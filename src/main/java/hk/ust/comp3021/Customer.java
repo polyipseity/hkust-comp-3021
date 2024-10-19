@@ -39,7 +39,7 @@ public class Customer extends Account {
                 '}';
     }
 
-    public int getCustomerType() {
+    public Integer getCustomerType() {
       return customerType;
     }
 

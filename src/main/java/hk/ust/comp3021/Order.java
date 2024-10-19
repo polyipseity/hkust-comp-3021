@@ -43,7 +43,7 @@ public class Order {
     this.rider = rider;
   }
 
-  public int getStatus() {
+  public Integer getStatus() {
     return status;
   }
 
@@ -51,7 +51,7 @@ public class Order {
     this.status = status;
   }
 
-  public double getEstimatedTime() {
+  public Double getEstimatedTime() {
     return estimatedTime;
   }
 
@@ -64,7 +64,7 @@ public class Order {
         / Constants.DELIVERY_SPEED;
   }
 
-  public long getId() {
+  public Long getId() {
     return id;
   }
 
@@ -76,7 +76,7 @@ public class Order {
     return customer;
   }
 
-  public long getCreateTime() {
+  public Long getCreateTime() {
     return createTime;
   }
 

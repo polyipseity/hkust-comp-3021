@@ -1,6 +1,5 @@
 package hk.ust.comp3021.rank;
 
-import hk.ust.comp3021.Constants;
 import hk.ust.comp3021.Order;
 
 public class CustomerPriorityRank implements PendingOrderRank {

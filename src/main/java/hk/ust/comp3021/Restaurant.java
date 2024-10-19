@@ -1,6 +1,7 @@
 package hk.ust.comp3021;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Restaurant extends Account {

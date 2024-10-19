@@ -364,18 +364,19 @@ public class DispatchSystem {
 
     /// Finish the main method to test your implementation.a
     public static void main(String[] args) {
+        DispatchSystem system = getInstance();
         try {
-            .parseAccounts("Accounts.txt");
-            .parseDishes("Dishes.txt");
-            .parseOrders("Orders.txt");
-            .writeOrders("availableOrders.txt", .availableOrders);
+            system.parseAccounts("Accounts.txt");
+            system.parseDishes("Dishes.txt");
+            system.parseOrders("Orders.txt");
+            system.writeOrders("availableOrders.txt", system.availableOrders);
 
-            .dispatchFirstRound();
+            system.dispatchFirstRound();
 
-            .writeOrders("firstRoundDispatchedOrders.txt", .dispatchedOrders);
-            List<Order> timeoutOrders = .getTimeoutDispatchedOrders();
+            system.writeOrders("firstRoundDispatchedOrders.txt", system.dispatchedOrders);
+            List<Order> timeoutOrders = system.getTimeoutDispatchedOrders();
 
-            .writeOrders("timeoutDispatchedOrders.txt", timeoutOrders);
+            system.writeOrders("timeoutDispatchedOrders.txt", timeoutOrders);
 
         } catch (IOException exception) {
             exception.printStackTrace();
@@ -383,7 +384,7 @@ public class DispatchSystem {
 
     }
 
-    public long getCurrentTimestamp() {
+    public Long getCurrentTimestamp() {
         return currentTimestamp;
     }
 }

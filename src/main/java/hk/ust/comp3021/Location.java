@@ -14,11 +14,11 @@ public class Location {
     return Math.sqrt(Math.pow(latitude - location.latitude, 2) + Math.pow(altitude - location.altitude, 2));
   }
 
-  public double getLatitude() {
+  public Double getLatitude() {
     return latitude;
   }
 
-  public double getAltitude() {
+  public Double getAltitude() {
     return altitude;
   }
 }

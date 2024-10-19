@@ -131,7 +131,7 @@ public abstract class Account {
         return accountManager;
     }
 
-    public long getId() {
+    public Long getId() {
       return id;
     }
 
