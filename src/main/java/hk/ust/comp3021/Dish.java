@@ -3,13 +3,21 @@ package hk.ust.comp3021;
 import java.math.BigDecimal;
 
 public class Dish {
-  private Long id;
+  private final Long id;
 
-  private String name;
+  private final String name;
 
-  private String desc;
+  private final String desc;
 
-  private BigDecimal price;
+  private final BigDecimal price;
 
-  private Long restaurantId;
+  private final Long restaurantId;
+
+  public Dish(long id, String name, String desc, BigDecimal price, long restaurantId) {
+    this.id = id;
+    this.name = name;
+    this.desc = desc;
+    this.price = price;
+    this.restaurantId = restaurantId;
+  }
 }

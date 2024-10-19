@@ -3,6 +3,7 @@ package hk.ust.comp3021;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -124,7 +125,15 @@ public class DispatchSystem {
                 }
 
                 // TODO.
+                long id = Long.parseLong(fields[0]);
+                String name = fields[1];
+                String desc = fields[2];
+                BigDecimal price = new BigDecimal(fields[3]);
+                long restaurantId = Long.parseLong(fields[4]);
 
+                Dish dish = new Dish(id, name, desc, price, restaurantId);
+                availableDishes.add(dish);
+                Restaurant.getRestaurantById(restaurantId).addDish(dish);
             }
         }
     }
