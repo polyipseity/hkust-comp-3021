@@ -71,4 +71,28 @@ public class NoteBook implements Serializable {
   public boolean createNote(String folderName, String title, String content) {
     return createTextNote(folderName, title, content);
   }
+
+  /**
+   * method to save the NoteBook instance to file
+   *
+   * @param file, the path of the file where to save the object serialization
+   * @return true if save on file is successful, false otherwise
+   */
+  public boolean save(String file) {
+    try (ObjectOutputStream stream = new ObjectOutputStream(new FileOutputStream(file))) {
+      stream.writeObject(this);
+    } catch (Exception e) {
+      return false;
+    }
+    return true;
+  }
+
+  public NoteBook(String file) {
+    try (ObjectInputStream stream = new ObjectInputStream(new FileInputStream(file))) {
+      NoteBook n = (NoteBook) stream.readObject();
+      this.folders = n.folders;
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
+  }
 }
