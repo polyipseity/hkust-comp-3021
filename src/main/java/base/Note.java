@@ -1,10 +1,15 @@
 package base;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.stream.IntStream;
 
-public class Note implements Comparable<Note> {
+public class Note implements Comparable<Note>, Serializable {
+  @Serial
+  private static final long serialVersionUID = -3270056686019664457L;
+
   private Date date;
 
   private String title;

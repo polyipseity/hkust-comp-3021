@@ -1,6 +1,12 @@
 package base;
 
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+
 public class TextNote extends Note {
+  @Serial
+  private static final long serialVersionUID = 843109159249680533L;
+
   public String content;
 
   public TextNote(String title) {

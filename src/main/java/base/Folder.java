@@ -1,12 +1,17 @@
 package base;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
-public class Folder implements Comparable<Folder> {
+public class Folder implements Comparable<Folder>, Serializable {
+  @Serial
+  private static final long serialVersionUID = 3854018765038654002L;
+
   private ArrayList<Note> notes;
 
   private String name;

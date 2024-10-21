@@ -1,10 +1,14 @@
 package base;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class NoteBook {
+public class NoteBook implements Serializable {
+  @Serial
+  private static final long serialVersionUID = 2982743321718011092L;
+
   private ArrayList<Folder> folders;
 
   public NoteBook() {
