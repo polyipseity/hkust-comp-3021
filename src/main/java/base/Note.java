@@ -24,12 +24,9 @@ public class Note implements Comparable<Note> {
   public boolean equals(Object obj) {
     if (this == obj)
       return true;
-    if (!(obj instanceof Note)) // if (obj == null || !getClass().equals(obj.getClass()))
+    if (!(obj instanceof Note obj2)) // if (obj == null || !getClass().equals(obj.getClass()))
       return false;
-    Note obj2 = (Note) obj;
-    if (!title.equals(obj2.title))
-      return false;
-    return true;
+    return title.equals(obj2.title);
   }
 
   @Override

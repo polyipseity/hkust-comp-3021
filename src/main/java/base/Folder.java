@@ -47,12 +47,9 @@ public class Folder implements Comparable<Folder> {
   public boolean equals(Object obj) {
     if (this == obj)
       return true;
-    if (!(obj instanceof Folder)) // if (obj == null || !getClass().equals(obj.getClass()))
+    if (!(obj instanceof Folder obj2)) // if (obj == null || !getClass().equals(obj.getClass()))
       return false;
-    Folder obj2 = (Folder) obj;
-    if (!name.equals(obj2.name))
-      return false;
-    return true;
+    return name.equals(obj2.name);
   }
 
   @Override
@@ -98,10 +95,8 @@ public class Folder implements Comparable<Folder> {
             .filter(note -> keywordTerms.stream().allMatch(keywordTerm -> keywordTerm.stream().anyMatch(word -> {
               if (note.getTitle().toLowerCase(Locale.ROOT).contains(word))
                 return true;
-              if (note instanceof TextNote) {
-                TextNote note2 = (TextNote) note;
-                if (note2.content.toLowerCase(Locale.ROOT).contains(word))
-                  return true;
+              if (note instanceof TextNote note2) {
+                return note2.content.toLowerCase(Locale.ROOT).contains(word);
               }
               return false;
             }))).toList();
