@@ -58,7 +58,7 @@ public class TextNote extends Note {
    * @param pathFolder path of the folder where to export the note
    *                   the file has to be named as the title of the note with
    *                   extension ".txt"
-   *
+   * <p>
    *                   if the tile contains white spaces " " they has to be
    *                   replaced with underscores "_"
    *
