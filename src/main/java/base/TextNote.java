@@ -28,4 +28,48 @@ public class TextNote extends Note {
     }
     return ret;
   }
+
+  public TextNote(File f) {
+    super(f.getName());
+    this.content = getTextFromFile(f.getAbsolutePath());
+  }
+
+  /**
+   * get the content of a file
+   *
+   * @param absolutePath of the file
+   * @return the content of the file
+   */
+  private String getTextFromFile(String absolutePath) {
+    try (Reader reader = new InputStreamReader(new FileInputStream(absolutePath));
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        Writer writer = new OutputStreamWriter(output)) {
+      reader.transferTo(writer);
+      return output.toString(StandardCharsets.UTF_8);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  /**
+   * export text note to file
+   *
+   *
+   * @param pathFolder path of the folder where to export the note
+   *                   the file has to be named as the title of the note with
+   *                   extension ".txt"
+   *
+   *                   if the tile contains white spaces " " they has to be
+   *                   replaced with underscores "_"
+   *
+   *
+   */
+  public void exportTextToFile(String pathFolder) {
+    File file = new File(pathFolder + File.separator + getTitle().replace(" ", "_") + ".txt");
+    try (Writer writer = new OutputStreamWriter(new FileOutputStream(file))) {
+      writer.write(content);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
 }
