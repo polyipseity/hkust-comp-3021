@@ -25,7 +25,7 @@ public class ImageNote extends Note {
 
   @Override
   public String toString() {
-    return getClass().getSimpleName() + icon + ':' + super.toString();
+    return getClass().getSimpleName() + ": " + icon + ' ' + super.toString();
   }
 
   public ImageNote(ImageNote note) {
