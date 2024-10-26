@@ -84,4 +84,9 @@ public class TextNote extends Note implements Iconifiable {
       content = new IconDigit(firstCharacter).base + content.substring(1);
     }
   }
+
+  public TextNote(TextNote note) {
+    super(note);
+    this.content = note.content;
+  }
 }

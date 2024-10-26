@@ -54,4 +54,9 @@ public class Note implements Comparable<Note>, Serializable {
   public String toString() {
     return date + "\t" + title;
   }
+
+  public Note(Note note) {
+    this.date = (Date) note.date.clone();
+    this.title = note.title;
+  }
 }

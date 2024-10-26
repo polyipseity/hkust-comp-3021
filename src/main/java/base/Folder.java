@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
-public class Folder implements Comparable<Folder>, Serializable {
+public class Folder implements Comparable<Folder>, Serializable, Cloneable {
   @Serial
   private static final long serialVersionUID = 3854018765038654002L;
 
@@ -105,5 +105,24 @@ public class Folder implements Comparable<Folder>, Serializable {
               }
               return false;
             }))).toList();
+  }
+
+  @Override
+  public Object clone() throws CloneNotSupportedException {
+    try {
+      Folder clone = (Folder) super.clone();
+      clone.notes = new ArrayList<>(clone.notes.stream().map(note -> {
+        if (note instanceof ImageNote note2) {
+          return new ImageNote(note2);
+        }
+        if (note instanceof TextNote note2) {
+          return new TextNote(note2);
+        }
+        return new Note(note);
+      }).toList());
+      return clone;
+    } catch (CloneNotSupportedException e) {
+      throw new AssertionError();
+    }
   }
 }

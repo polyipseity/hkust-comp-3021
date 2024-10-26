@@ -27,4 +27,10 @@ public class ImageNote extends Note {
   public String toString() {
     return getClass().getSimpleName() + icon + ':' + super.toString();
   }
+
+  public ImageNote(ImageNote note) {
+    super(note);
+    this.image = note.image;
+    this.icon = note.icon;
+  }
 }
