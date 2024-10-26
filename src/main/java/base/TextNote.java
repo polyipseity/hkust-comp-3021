@@ -59,7 +59,7 @@ public class TextNote extends Note implements Iconifiable {
    *                   the file has to be named as the title of the note with
    *                   extension ".txt"
    *                   <p>
-   *                   if the tile contains white spaces " " they has to be
+   *                   if the tile contains white spaces " " they have to be
    *                   replaced with underscores "_"
    *
    *

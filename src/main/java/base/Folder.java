@@ -108,7 +108,7 @@ public class Folder implements Comparable<Folder>, Serializable, Cloneable {
   }
 
   @Override
-  public Object clone() throws CloneNotSupportedException {
+  public Folder clone() {
     try {
       Folder clone = (Folder) super.clone();
       clone.notes = new ArrayList<>(clone.notes.stream().map(note -> {
