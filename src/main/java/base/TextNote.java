@@ -3,7 +3,7 @@ package base;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 
-public class TextNote extends Note {
+public class TextNote extends Note implements Iconifiable {
   @Serial
   private static final long serialVersionUID = 843109159249680533L;
 
@@ -70,6 +70,18 @@ public class TextNote extends Note {
       writer.write(content);
     } catch (IOException e) {
       throw new RuntimeException(e);
+    }
+  }
+
+  @Override
+  public void iconify() {
+    char firstCharacter = content.charAt(0);
+    if ('a' <= firstCharacter && firstCharacter <= 'z') {
+      content = new IconLowerCase(firstCharacter).base + content.substring(1);
+    } else if ('A' <= firstCharacter && firstCharacter <= 'Z') {
+      content = new IconUpperCase(firstCharacter).base + content.substring(1);
+    } else if ('0' <= firstCharacter && firstCharacter <= '9') {
+      content = new IconDigit(firstCharacter).base + content.substring(1);
     }
   }
 }
