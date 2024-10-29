@@ -18,8 +18,8 @@ public class JUnitTest {
 		NoteBook nb = new NoteBook();
 		nb.createTextNote("Note1", "Java", "comp3021");
 		nb.createTextNote("Note2", "Assignment", "due on 2023-10-13");
-		nb.createTextNote("Note3", "lab","need to attend weekly");
-		nb.createTextNote("Note4", "lab7","testing");
+		nb.createTextNote("Note3", "lab", "need to attend weekly");
+		nb.createTextNote("Note4", "lab7", "testing");
 		List<Note> notes = nb.searchNotes("java or DUE or testing");
 		System.out.println(notes.size());
 		assertEquals(3, notes.size(), "The size of the search results is not match");
@@ -28,12 +28,13 @@ public class JUnitTest {
 			titles.add(note.getTitle());
 		}
 		HashSet<String> expectedOutputs = new HashSet<>();
-		expectedOutputs.add("Javascript");
+		expectedOutputs.add("Java");
 		expectedOutputs.add("Assignment");
 		expectedOutputs.add("lab7");
 		assertEquals(expectedOutputs, titles, "The search results is not match");
 	}
-	
+
 	// To do
-	// Design the second test case which reveals the bug in function unknownFunction()
+	// Design the second test case which reveals the bug in function
+	// unknownFunction()
 }
