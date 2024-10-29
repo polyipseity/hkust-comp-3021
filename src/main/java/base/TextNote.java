@@ -2,6 +2,7 @@ package base;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 
 public class TextNote extends Note implements Iconifiable {
   @Serial
@@ -88,5 +89,31 @@ public class TextNote extends Note implements Iconifiable {
   public TextNote(TextNote note) {
     super(note);
     this.content = note.content;
+  }
+
+  public String getContent() {
+    return content;
+  }
+
+  public Character unknownFunction() {
+    HashMap<Character, Integer> count = new HashMap<Character, Integer>();
+    String a = this.getTitle() + this.getContent();
+    int b = 0;
+    Character r = ' ';
+    for (int i = 0; i < a.length(); i++) {
+      Character c = a.charAt(i);
+      if (c <= 'Z' && c >= 'A' || c <= 'z' && c >= 'a') {
+        if (!count.containsKey(c)) {
+          count.put(c, 1);
+        } else {
+          count.put(c, count.get(c) + 1);
+          if (count.get(c) > b) {
+            b = count.get(c);
+            r = c;
+          }
+        }
+      }
+    }
+    return r;
   }
 }
