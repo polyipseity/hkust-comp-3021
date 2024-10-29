@@ -37,4 +37,10 @@ public class JUnitTest {
 	// To do
 	// Design the second test case which reveals the bug in function
 	// unknownFunction()
+
+	@Test
+	public void testUnknownFunction() {
+		TextNote note = new TextNote("a", "");
+		assertEquals('a', note.unknownFunction());
+	}
 }
