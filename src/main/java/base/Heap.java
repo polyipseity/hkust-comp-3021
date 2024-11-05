@@ -45,6 +45,8 @@ public class Heap<T extends Comparable<T>> {
         // TODO
         if (size() == 0)
             throw new IllegalStateException();
+        if (size() == 1)
+            return container.remove(0);
         T first = peek();
         T last = container.remove(size() - 1);
         container.set(0, last);
@@ -101,6 +103,8 @@ public class Heap<T extends Comparable<T>> {
                 container.set(parentPos, child);
                 container.set(pos, parent);
                 pos = parentPos;
+            } else {
+                break;
             }
         }
     }
