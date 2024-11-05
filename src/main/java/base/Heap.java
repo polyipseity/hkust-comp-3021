@@ -4,9 +4,12 @@ import java.util.*;
 
 /**
  * The class of a binary min heap data structure.
- * Please refer to <a href="https://en.wikipedia.org/wiki/Heap_(data_structure)">this wikipedia page</a> for more details.
+ * Please refer to
+ * <a href="https://en.wikipedia.org/wiki/Heap_(data_structure)">this wikipedia
+ * page</a> for more details.
  * <p>
  * Note: We want to accept any type which is comparable to itself.
+ * 
  * @param <T>
  */
 public class Heap<T extends Comparable<T>> {
@@ -20,21 +23,33 @@ public class Heap<T extends Comparable<T>> {
      * Find a min item of a min-heap.
      *
      * @return If size is 0, throw {@link IllegalStateException}.
-     * Otherwise, return the first element of {@link #container}
+     *         Otherwise, return the first element of {@link #container}
      */
     public T peek() {
         // TODO
+        if (size() == 0)
+            throw new IllegalStateException();
+        return container.get(0);
     }
 
     /**
      * Remove the minimum item (root) of a min heap, respectively
      *
-     * @return If size is 0, throw {@link IllegalStateException}. Otherwise, temporarily save the first element.
-     * Afterward, set the first position to the last element, and remove the last element.
-     * Call {@link #heapifyDown()}, then return the original first element
+     * @return If size is 0, throw {@link IllegalStateException}. Otherwise,
+     *         temporarily save the first element.
+     *         Afterward, set the first position to the last element, and remove the
+     *         last element.
+     *         Call {@link #heapifyDown()}, then return the original first element
      */
     public T poll() {
         // TODO
+        if (size() == 0)
+            throw new IllegalStateException();
+        T first = peek();
+        T last = container.remove(size() - 1);
+        container.set(0, last);
+        heapifyDown();
+        return first;
     }
 
     private void heapifyDown() {
@@ -59,7 +74,9 @@ public class Heap<T extends Comparable<T>> {
      * @param obj the object to add
      */
     public void add(T obj) {
-        //TODO
+        // TODO
+        container.add(obj);
+        heapifyUp();
     }
 
     public void addAll(Collection<T> list) {
@@ -67,12 +84,25 @@ public class Heap<T extends Comparable<T>> {
     }
 
     /**
-     * While the last element has a parent and is smaller than its parent, swap the two elements. Then, check again
-     * with the new parent until there's either no parent or we're larger than our parent.
+     * While the last element has a parent and is smaller than its parent, swap the
+     * two elements. Then, check again
+     * with the new parent until there's either no parent or we're larger than our
+     * parent.
      * you can refer to {@link #heapifyDown()}.
      */
     private void heapifyUp() {
         // TODO
+        int pos = size() - 1;
+        while (hasParent(pos)) {
+            int parentPos = getParentIndex(pos);
+            T parent = container.get(parentPos);
+            T child = container.get(pos);
+            if (parent.compareTo(child) > 0) {
+                container.set(parentPos, child);
+                container.set(pos, parent);
+                pos = parentPos;
+            }
+        }
     }
 
     public int size() {
@@ -113,8 +143,20 @@ public class Heap<T extends Comparable<T>> {
      * {@link Iterator<T>}.
      */
     // TODO
+    public class HeapIterator implements Iterator<T> {
+        private final Iterator<T> delegate = container.iterator();
 
-    
+        @Override
+        public boolean hasNext() {
+            return delegate.hasNext();
+        }
+
+        @Override
+        public T next() {
+            return delegate.next();
+        }
+
+    }
 
     public HeapIterator iterator() {
         return new HeapIterator();
