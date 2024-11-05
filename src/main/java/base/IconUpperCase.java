@@ -12,6 +12,6 @@ public class IconUpperCase extends Icon {
 
   @Override
   char encircle(char c) {
-    return (char) (c - 'A' + '\u24B6');
+    return (char) (c - 'A' + 'Ⓐ');
   }
 }

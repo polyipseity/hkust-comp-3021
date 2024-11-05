@@ -9,7 +9,7 @@ public class NoteBook implements Serializable {
   @Serial
   private static final long serialVersionUID = 2982743321718011092L;
 
-  private ArrayList<Folder> folders;
+  private final ArrayList<Folder> folders;
 
   public NoteBook() {
     this.folders = new ArrayList<>();
@@ -64,10 +64,12 @@ public class NoteBook implements Serializable {
     return folders.stream().flatMap(folder -> folder.searchNotes(keywords).stream()).toList();
   }
 
+  @SuppressWarnings("UnusedReturnValue")
   public boolean createNote(String folderName, String title) {
     return createImageNote(folderName, title);
   }
 
+  @SuppressWarnings("UnusedReturnValue")
   public boolean createNote(String folderName, String title, String content) {
     return createTextNote(folderName, title, content);
   }

@@ -12,6 +12,6 @@ public class IconDigit extends Icon {
 
   @Override
   char encircle(char c) {
-    return (char) (c - '0' + '\u2460');
+    return (char) (c - '0' + '①');
   }
 }

@@ -10,9 +10,9 @@ public class Note implements Comparable<Note>, Serializable {
   @Serial
   private static final long serialVersionUID = -3270056686019664457L;
 
-  private Date date;
+  private final Date date;
 
-  private String title;
+  private final String title;
 
   static long counter = 1L;
 
@@ -40,7 +40,7 @@ public class Note implements Comparable<Note>, Serializable {
   }
 
   @Override
-  public int compareTo(Note o) {
+  public int compareTo(@SuppressWarnings("NullableProblems") Note o) {
     Class<?>[] classOrder = { TextNote.class, ImageNote.class };
     int classCompareTo = IntStream.range(0, classOrder.length).filter(idx -> classOrder[idx].isInstance(this))
         .findFirst().orElse(-1)

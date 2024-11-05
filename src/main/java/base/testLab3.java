@@ -1,14 +1,10 @@
 package base;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import base.Folder;
-import base.Note;
-import base.NoteBook;
-
 public class testLab3 {
-	public static void main(String args[]) {
+	@SuppressWarnings("ExtractMethodRecommender")
+	public static void main(String[] args) {
 
 		NoteBook nb = new NoteBook();
 		nb.createTextNote("Java", "COMP30213021 syllabus", "Be able to implement object-oriented concepts in Java.");
@@ -37,7 +33,7 @@ public class testLab3 {
 
 		List<Note> notes = nb.searchNotes("java or LAB attendance OR SESSION");
 		System.out.println("Search Results:");
-		if (notes == null || notes.size() == 0) {
+		if (notes == null || notes.isEmpty()) {
 			System.out.println("No Search Results");
 		} else {
 			for (Note note : notes) {

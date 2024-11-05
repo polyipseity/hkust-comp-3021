@@ -3,7 +3,7 @@ package base;
 import java.util.List;
 
 public class TestLab6 {
-	public static void main(String args[]) throws Exception {
+	public static void main(String[] args) {
 
 		NoteBook nb = new NoteBook();
 		nb.createNote("Java", "COMP3021 syllabus", "Be able to implement object-oriented concepts in Java.");

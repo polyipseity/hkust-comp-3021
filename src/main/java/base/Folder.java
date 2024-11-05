@@ -14,7 +14,7 @@ public class Folder implements Comparable<Folder>, Serializable, Cloneable {
 
   private ArrayList<Note> notes;
 
-  private String name;
+  private final String name;
 
   public Folder(String name) {
     this.notes = new ArrayList<>();

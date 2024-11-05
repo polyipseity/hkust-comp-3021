@@ -96,12 +96,12 @@ public class TextNote extends Note implements Iconifiable {
   }
 
   public Character unknownFunction() {
-    HashMap<Character, Integer> count = new HashMap<Character, Integer>();
+    HashMap<Character, Integer> count = new HashMap<>();
     String a = this.getTitle() + this.getContent();
     int b = 0;
-    Character r = ' ';
+    char r = ' ';
     for (int i = 0; i < a.length(); i++) {
-      Character c = a.charAt(i);
+      char c = a.charAt(i);
       if (c <= 'Z' && c >= 'A' || c <= 'z' && c >= 'a') {
         if (!count.containsKey(c)) {
           count.put(c, 1);

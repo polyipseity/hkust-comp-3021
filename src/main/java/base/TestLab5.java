@@ -3,7 +3,8 @@ package base;
 import java.io.File;
 
 public class TestLab5 {
-	public static void main(String args[]) throws Exception {
+	@SuppressWarnings("ExtractMethodRecommender")
+	public static void main(String[] args) throws Exception {
 
 		NoteBook nb = new NoteBook();
 		nb.createTextNote("Java", "COMP30213021 syllabus", "Be able to implement object-oriented concepts in Java.");
@@ -35,10 +36,10 @@ public class TestLab5 {
 		TextNote t = (TextNote) nb2.getFolders().get(0).getNotes().get(0);
 		t.exportTextToFile(".");
 
-		if (new File(((TextNote) nb2.getFolders().get(0).getNotes().get(0)).getTitle().replaceAll(" ", "_") + ".txt")
+		if (new File(nb2.getFolders().get(0).getNotes().get(0).getTitle().replaceAll(" ", "_") + ".txt")
 				.exists()) {
 			System.out.println("TextNote exported in "
-					+ new File(((TextNote) nb2.getFolders().get(0).getNotes().get(0)).getTitle().replaceAll(" ", "_") + ".txt")
+					+ new File(nb2.getFolders().get(0).getNotes().get(0).getTitle().replaceAll(" ", "_") + ".txt")
 							.getAbsolutePath());
 		} else {
 			throw new Exception("Your code has some problems.......");

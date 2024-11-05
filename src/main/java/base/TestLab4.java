@@ -3,7 +3,7 @@ package base;
 import java.util.List;
 
 public class TestLab4 {
-    public static void main(String args[]) {
+    public static void main(String[] args) {
 
         NoteBook nb = new NoteBook();
         nb.createNote("Java", "COMP3021 syllabus", "Be able to implement object-oriented concepts in Java.");
@@ -33,7 +33,7 @@ public class TestLab4 {
         int findex = 0;
         for (Folder folder : nb.getFolders()) {
             if (folder.getName().equals("Assignment")) {
-                System.out.println("Folder " + findex++ + ":" + folder.toString());
+                System.out.println("Folder " + findex++ + ":" + folder);
                 List<Note> notes = folder.getNotes();
                 int nindex = 0;
                 for (Note note : notes) {
@@ -44,7 +44,7 @@ public class TestLab4 {
 
         List<Note> notes = nb.searchNotes("assignment or and system or date");
         System.out.println("Search Results:");
-        if (notes == null || notes.size() == 0) {
+        if (notes == null || notes.isEmpty()) {
             System.out.println("No Search Results");
         } else {
             for (Note note : notes) {

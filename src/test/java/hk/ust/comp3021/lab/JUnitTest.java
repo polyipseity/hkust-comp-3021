@@ -38,6 +38,7 @@ public class JUnitTest {
 	// Design the second test case which reveals the bug in function
 	// unknownFunction()
 
+	@SuppressWarnings("TestFailedLine")
 	@Test
 	public void testUnknownFunction() {
 		TextNote note = new TextNote("a", "");
