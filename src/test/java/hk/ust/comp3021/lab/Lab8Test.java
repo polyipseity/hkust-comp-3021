@@ -51,7 +51,7 @@ public class Lab8Test {
         var results = Arrays.asList(1, 2, 4, 14, 5, 31, 5, 27, 53, 26, 44, 213, 35, 33, 19, 210, 52);
         integerHeap.addAll(values);
         Iterator<Integer> it = integerHeap.iterator();
-        for (int x: results) {
+        for (int x : results) {
             assertTrue(it.hasNext());
             assertEquals(it.next(), Integer.valueOf(x));
         }
