@@ -45,11 +45,12 @@ public class Lab9Test {
 
 	@Test
 	public void test4() {
-		int[] arrInt = {100, 200, 300, 400, 500, 600, 500, 400, 300, 700, 200};
+		int[] arrInt = { 100, 200, 300, 400, 500, 600, 500, 400, 300, 700, 200 };
 		ArrayList<Account> accounts = new ArrayList<>();
 
 		int id = 0;
-		for(Integer balance : arrInt) accounts.add(new Account(id++, balance));
+		for (Integer balance : arrInt)
+			accounts.add(new Account(id++, balance));
 
 		int maxID = Account.getMaxAccountID(accounts);
 		assertEquals(9, maxID);
