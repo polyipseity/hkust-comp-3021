@@ -5,7 +5,7 @@ import java.util.*;
 
 public class Service implements EventEmitter {
 	private final List<Listener> listeners = new ArrayList<>();
-	Timer timer;
+	Timer timer = new Timer();
 
 	// TODO 1: Implement the methods addListener, removeListener and emitEvent in EventEmitter interface
 	@Override
@@ -36,13 +36,15 @@ public class Service implements EventEmitter {
 	 */
 	public void startTick(Duration interval) {
 		// TODO
-		new TimerTask() {
+		class Task extends TimerTask {
 			@Override
 			public void run() {
+				timer.schedule(new Task(), interval.toMillis());
 				emitEvent(new Event(new Date()));
-				timer.schedule(this, 1000);
 			}
-		}.run();
+		}
+		;
+		new Task().run();
 	}
 
 	/**
