@@ -5,7 +5,7 @@ import java.util.*;
 
 public class Service implements EventEmitter {
 	private final List<Listener> listeners = new ArrayList<>();
-	Timer timer = new Timer();
+	private final Timer timer = new Timer();
 
 	// TODO 1: Implement the methods addListener, removeListener and emitEvent in EventEmitter interface
 	@Override
@@ -43,7 +43,6 @@ public class Service implements EventEmitter {
 				emitEvent(new Event(new Date()));
 			}
 		}
-		;
 		new Task().run();
 	}
 

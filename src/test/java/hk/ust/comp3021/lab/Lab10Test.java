@@ -107,6 +107,7 @@ public class Lab10Test {
 		service.startTick(interval);
 		// stop tick after ((n-1)*interval) seconds. The service should be able to tick n times.
 		new Timer().schedule(new TimerTask() {
+			@SuppressWarnings("CallToPrintStackTrace")
 			@Override
 			public void run() {
 				service.stopTick();

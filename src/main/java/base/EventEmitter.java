@@ -1,10 +1,15 @@
 package base;
 
+import java.io.Serial;
 import java.util.EventListener;
 import java.util.EventObject;
 
+@SuppressWarnings("unused")
 public interface EventEmitter {
 	class Event extends EventObject {
+		@Serial
+		private static final long serialVersionUID = 4663489234891660654L;
+
 		/**
 		 * Constructs a prototypical Event.
 		 *
@@ -18,7 +23,7 @@ public interface EventEmitter {
 
 	@FunctionalInterface
 	interface Listener extends EventListener {
-		void handle(Event event);
+		void handle(@SuppressWarnings("unused") Event event);
 	}
 
 	/**

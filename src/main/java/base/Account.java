@@ -6,7 +6,7 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 public class Account {
-	public int id;
+	public final int id;
 	public int balance;
 
 	public Account(int id, int balance) {
@@ -16,7 +16,7 @@ public class Account {
 
 	// TODO: Task1
 	// replace the null with a lambda expression
-	public static Consumer<Account> add100 = account -> account.balance += 100;
+	public static final Consumer<Account> add100 = account -> account.balance += 100;
 
 	// TODO: Task2
 	/**
@@ -24,9 +24,9 @@ public class Account {
 	 * lowerBound is 0, upperBound is 10000
 	 * We want checkBound to check BOTH lowerBound AND upperBound.
 	 */
-	public static Predicate<Account> lowerBound = account -> 0 <= account.balance;
-	public static Predicate<Account> upperBound = account -> account.balance <= 10000;
-	public static Predicate<Account> checkBound = lowerBound.and(upperBound);
+	public static final Predicate<Account> lowerBound = account -> 0 <= account.balance;
+	public static final Predicate<Account> upperBound = account -> account.balance <= 10000;
+	public static final Predicate<Account> checkBound = lowerBound.and(upperBound);
 
 	// TODO: Task3
 	// replace the null with a lambda expression
@@ -42,7 +42,7 @@ public class Account {
 	}
 
 	// TODO
-	public static AddMaker maker = N -> account -> account.balance += N;
+	public static final AddMaker maker = N -> account -> account.balance += N;
 
 	// You can assume that all the Account in acconts have positive balances.
 	public static int getMaxAccountID(List<Account> accounts) {
