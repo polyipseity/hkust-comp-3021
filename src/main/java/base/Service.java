@@ -7,7 +7,20 @@ public class Service implements EventEmitter {
     Timer timer;
 
     // TODO 1: Implement the methods addListener, removeListener and emitEvent in EventEmitter interface
+    @Override
+    public void addListener(Listener listener) {
+        listeners.add(listener);
+    }
 
+    @Override
+    public void removeListener(Listener listener) {
+        listeners.remove(listener);
+    }
+
+    @Override
+    public void emitEvent(Event event) {
+        listeners.forEach(listener -> listener.handle(event));
+    }
 
     /**
      * TODO 2: Complete the method startTick
@@ -22,6 +35,13 @@ public class Service implements EventEmitter {
      */
     public void startTick(Duration interval) {
         // TODO
+        new TimerTask() {
+            @Override
+            public void run() {
+                emitEvent(new Event(new Date()));
+                timer.schedule(this, 1000);
+            }
+        }.run();
     }
 
     /**
@@ -31,5 +51,6 @@ public class Service implements EventEmitter {
      */
     public void stopTick() {
         // TODO
+        timer.cancel();
     }
 }
