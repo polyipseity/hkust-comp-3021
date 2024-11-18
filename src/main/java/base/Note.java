@@ -7,56 +7,56 @@ import java.util.Date;
 import java.util.stream.IntStream;
 
 public class Note implements Comparable<Note>, Serializable {
-  @Serial
-  private static final long serialVersionUID = -3270056686019664457L;
+	@Serial
+	private static final long serialVersionUID = -3270056686019664457L;
 
-  private final Date date;
+	private final Date date;
 
-  private final String title;
+	private final String title;
 
-  static long counter = 1L;
+	static long counter = 1L;
 
-  public Note(String title) {
-    this.date = new Date(counter++);
-    this.title = title;
-  }
+	public Note(String title) {
+		this.date = new Date(counter++);
+		this.title = title;
+	}
 
-  public String getTitle() {
-    return title;
-  }
+	public String getTitle() {
+		return title;
+	}
 
-  @Override
-  public boolean equals(Object obj) {
-    if (this == obj)
-      return true;
-    if (!(obj instanceof Note obj2)) // if (obj == null || !getClass().equals(obj.getClass()))
-      return false;
-    return title.equals(obj2.title);
-  }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!(obj instanceof Note obj2)) // if (obj == null || !getClass().equals(obj.getClass()))
+			return false;
+		return title.equals(obj2.title);
+	}
 
-  @Override
-  public int hashCode() {
-    return Arrays.hashCode(new Object[] { title });
-  }
+	@Override
+	public int hashCode() {
+		return Arrays.hashCode(new Object[]{title});
+	}
 
-  @Override
-  public int compareTo(@SuppressWarnings("NullableProblems") Note o) {
-    Class<?>[] classOrder = { TextNote.class, ImageNote.class };
-    int classCompareTo = IntStream.range(0, classOrder.length).filter(idx -> classOrder[idx].isInstance(this))
-        .findFirst().orElse(-1)
-        - IntStream.range(0, classOrder.length).filter(idx -> classOrder[idx].isInstance(o)).findFirst().orElse(-1);
-    if (classCompareTo != 0)
-      return classCompareTo;
-    return title.compareTo(o.title);
-  }
+	@Override
+	public int compareTo(@SuppressWarnings("NullableProblems") Note o) {
+		Class<?>[] classOrder = {TextNote.class, ImageNote.class};
+		int classCompareTo = IntStream.range(0, classOrder.length).filter(idx -> classOrder[idx].isInstance(this))
+				.findFirst().orElse(-1)
+				- IntStream.range(0, classOrder.length).filter(idx -> classOrder[idx].isInstance(o)).findFirst().orElse(-1);
+		if (classCompareTo != 0)
+			return classCompareTo;
+		return title.compareTo(o.title);
+	}
 
-  @Override
-  public String toString() {
-    return date + "\t" + title;
-  }
+	@Override
+	public String toString() {
+		return date + "\t" + title;
+	}
 
-  public Note(Note note) {
-    this.date = (Date) note.date.clone();
-    this.title = note.title;
-  }
+	public Note(Note note) {
+		this.date = (Date) note.date.clone();
+		this.title = note.title;
+	}
 }

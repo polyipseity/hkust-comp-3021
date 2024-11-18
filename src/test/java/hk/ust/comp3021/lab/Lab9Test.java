@@ -1,10 +1,10 @@
 package hk.ust.comp3021.lab;
 
+import base.Account;
+import org.junit.jupiter.api.Test;
+
 import java.util.ArrayList;
 import java.util.function.Consumer;
-
-import base.*;
-import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -45,7 +45,7 @@ public class Lab9Test {
 
 	@Test
 	public void test4() {
-		int[] arrInt = { 100, 200, 300, 400, 500, 600, 500, 400, 300, 700, 200 };
+		int[] arrInt = {100, 200, 300, 400, 500, 600, 500, 400, 300, 700, 200};
 		ArrayList<Account> accounts = new ArrayList<>();
 
 		int id = 0;

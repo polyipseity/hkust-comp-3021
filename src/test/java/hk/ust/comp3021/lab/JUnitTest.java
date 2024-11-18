@@ -1,15 +1,14 @@
 package hk.ust.comp3021.lab;
 
-import static org.junit.jupiter.api.Assertions.*;
+import base.Note;
+import base.NoteBook;
+import base.TextNote;
+import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
 import java.util.List;
 
-import org.junit.jupiter.api.Test;
-
-import base.Note;
-import base.NoteBook;
-import base.TextNote;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class JUnitTest {
 

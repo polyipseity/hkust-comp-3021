@@ -2,7 +2,8 @@ package base;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.function.*;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 public class Account {
 	public int id;

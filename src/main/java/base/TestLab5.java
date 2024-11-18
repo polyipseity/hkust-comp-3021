@@ -40,7 +40,7 @@ public class TestLab5 {
 				.exists()) {
 			System.out.println("TextNote exported in "
 					+ new File(nb2.getFolders().get(0).getNotes().get(0).getTitle().replaceAll(" ", "_") + ".txt")
-							.getAbsolutePath());
+					.getAbsolutePath());
 		} else {
 			throw new Exception("Your code has some problems.......");
 		}
