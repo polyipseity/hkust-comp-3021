@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-import java.util.function.BooleanSupplier;
+import java.util.function.IntSupplier;
 
 /**
  * <p>Your task in this lab is to implement a parallel string merger, which provides a method to merge strings in parallel (with threads).<p>
@@ -63,15 +63,15 @@ public class ParallelMerger {
 	 */
 	private static class Worker implements Runnable {
 		private final String segment;
-		private boolean completed = false;
-		private final BooleanSupplier previousCompleted;
+		private int written = 0;
+		private final IntSupplier previouslyWritten;
 		private final Lock sharedLock;
 		private final Condition currentCondition;
 		private final Condition nextCondition;
 
-		private Worker(String segment) {
+		private Worker(String segment, IntSupplier previouslyWritten) {
 			this.segment = segment;
-			this.previousCompleted = () -> true;
+			this.previouslyWritten = previouslyWritten;
 			this.sharedLock = new ReentrantLock();
 			this.currentCondition = sharedLock.newCondition();
 			this.nextCondition = sharedLock.newCondition();
@@ -79,7 +79,7 @@ public class ParallelMerger {
 
 		private Worker(String segment, Worker lastWorker) {
 			this.segment = segment;
-			this.previousCompleted = () -> lastWorker.completed;
+			this.previouslyWritten = () -> lastWorker.written;
 			this.sharedLock = lastWorker.sharedLock;
 			this.currentCondition = lastWorker.nextCondition;
 			this.nextCondition = sharedLock.newCondition();
@@ -89,16 +89,16 @@ public class ParallelMerger {
 		public void run() {
 			sharedLock.lock();
 			try {
-				while (!previousCompleted.getAsBoolean()) {
-					try {
-						currentCondition.await();
-					} catch (InterruptedException ignored) {
+				while (written < segment.length()) {
+					while (previouslyWritten.getAsInt() <= written) {
+						try {
+							currentCondition.await();
+						} catch (InterruptedException ignored) {
+						}
 					}
+					resultWriter.write(segment.charAt(written++));
+					nextCondition.signal();
 				}
-				for (char character : segment.toCharArray())
-					resultWriter.write(character);
-				completed = true;
-				nextCondition.notify();
 			} finally {
 				sharedLock.unlock();
 			}
@@ -119,24 +119,38 @@ public class ParallelMerger {
 	 *                     For example, suppose the merge result should be "hello", then the {@code resultWriter}
 	 *                     should be called 5 times with each character in the order.
 	 *                     <p>
-	 *                     TODO: complete this method to implement the above functionality.
+	 *                                                                                 TODO: complete this method to implement the above functionality.
 	 */
 	public static void merge(String[] segments, ThreadSafeCharacterWriter resultWriter) throws InterruptedException {
 		ParallelMerger.resultWriter = resultWriter;
 		// Start from here
 		// ...
 		List<Thread> threads = new ArrayList<>();
+		Worker firstWorker = null;
 		Worker lastWorker = null;
+		int[] written = {0};
 		for (String segment : segments) {
 			if (lastWorker == null) {
-				lastWorker = new Worker(segment);
+				firstWorker = lastWorker = new Worker(segment, () -> written[0]);
 				threads.add(new Thread(lastWorker));
 				continue;
 			}
 			lastWorker = new Worker(segment, lastWorker);
 			threads.add(new Thread(lastWorker));
 		}
+		assert firstWorker != null;
 		threads.forEach(Thread::start);
+		while (written[0] < segments[0].length()) {
+			firstWorker.sharedLock.lock();
+			try {
+				while (lastWorker.written < written[0])
+					lastWorker.nextCondition.await();
+				++written[0];
+				firstWorker.currentCondition.signal();
+			} finally {
+				firstWorker.sharedLock.unlock();
+			}
+		}
 		for (Thread thread : threads) {
 			thread.join();
 		}
