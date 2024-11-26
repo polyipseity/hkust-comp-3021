@@ -119,7 +119,7 @@ public class ParallelMerger {
 	 *                     For example, suppose the merge result should be "hello", then the {@code resultWriter}
 	 *                     should be called 5 times with each character in the order.
 	 *                     <p>
-	 *                                                                                 TODO: complete this method to implement the above functionality.
+	 *                                                                                                                         TODO: complete this method to implement the above functionality.
 	 */
 	public static void merge(String[] segments, ThreadSafeCharacterWriter resultWriter) throws InterruptedException {
 		ParallelMerger.resultWriter = resultWriter;
@@ -140,16 +140,16 @@ public class ParallelMerger {
 		}
 		assert firstWorker != null;
 		threads.forEach(Thread::start);
-		while (written[0] < segments[0].length()) {
-			firstWorker.sharedLock.lock();
-			try {
+		firstWorker.sharedLock.lock();
+		try {
+			while (written[0] < segments[0].length()) {
 				while (lastWorker.written < written[0])
 					lastWorker.nextCondition.await();
 				++written[0];
 				firstWorker.currentCondition.signal();
-			} finally {
-				firstWorker.sharedLock.unlock();
 			}
+		} finally {
+			firstWorker.sharedLock.unlock();
 		}
 		for (Thread thread : threads) {
 			thread.join();
